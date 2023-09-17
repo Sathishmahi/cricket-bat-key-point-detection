@@ -3,10 +3,11 @@ from utils import read_config  # Import a custom utility function
 import gdown  # Import gdown for downloading files
 import cv2  # Import OpenCV for image processing
 import numpy as np  # Import NumPy for numerical operations
-from ultralytics import YOLO  # Import YOLOv5 from Ultralytics for object detection
+from ultralytics import YOLO  # Import YOLOv8 from Ultralytics for object detection
 import os  # Import the OS module for file operations
 import cvzone  # Import cvzone for additional image processing functions
 import json
+import logging
 
 # Define a class named 'Detection'
 class Detection:
@@ -14,10 +15,11 @@ class Detection:
     def __init__(self):
         # Read configuration settings using the custom utility function
         self.config = read_config()
+        logging.info(f"config details {self.config} ")
 
     def dowload_model(self)->None:
         """
-        Download a pre-trained YOLOv5 model from Google Drive based on the provided model ID.
+        Download a pre-trained YOLOv8 model from Google Drive based on the provided model ID.
         Save the model to the specified directory.
         """
 
@@ -34,7 +36,9 @@ class Detection:
 
         # Check if the model ID is provided
         if not model_id:
-            raise ValueError("No model id provided")
+            e = "No model id provided"
+            logging.exception(e)
+            raise ValueError(e)
 
         try:
             # Download the model only if it doesn't already exist
@@ -43,23 +47,26 @@ class Detection:
             else:
                 print(f"Model already downloaded {self.model_path}")
         except Exception as e:
+            logging.exception(e)
             raise Exception(f"Something failed to download the model. Please check model id {model_id} or other issues.")
 
     def load_model(self)->None:
         """
-        Load the YOLOv5 model from the saved model path.
+        Load the YOLOv8 model from the saved model path.
         """
 
         # Check if the model file exists
         if not os.path.exists(self.model_path):
-            raise FileExistsError(f"Model not found {self.model_path}")
+            e = f"Model not found {self.model_path}"
+            logging.exception(e)
+            raise FileExistsError(e)
 
-        # Load the YOLOv5 model using Ultralytics
+        # Load the YOLOv8 model using Ultralytics
         self.model = YOLO(self.model_path)
 
     def detection(self, model)->dict:
         """
-        Perform object detection on the input image using the loaded YOLOv5 model.
+        Perform object detection on the input image using the loaded YOLOv8 model.
         Return the detection results.
         """
 
@@ -69,9 +76,11 @@ class Detection:
 
         # Check if the input image file exists
         if not os.path.exists(input_img_path):
-            raise FileNotFoundError(f"Input image path {input_img_path} not found")
+            e = f"Input image path {input_img_path} not found"
+            logging.exception(e)
+            raise FileNotFoundError(e)
 
-        # Perform object detection using the YOLOv5 model and return the results
+        # Perform object detection using the YOLOv8 model and return the results
         return model.predict(input_img_path)[0]
 
     def draw_circle_bb(self, result: dict)->np.array:
@@ -103,7 +112,7 @@ class Detection:
             final_dict["bboxes"].append([x1,y1,x2,y2])
             cvzone.cornerRect(input_arr, (x1, y1, (x2 - x1), (y2 - y1)), 15, 3)
             cvzone.putTextRect(input_arr, f"{cls}", (int(bb[0]), int(bb[1]) - 20), 2, 2, offset=1)
-
+        logging.info(f"result {final_dict}")
         return input_arr,final_dict
     def save_json(self,content:dict)->None:
         json_name = self.config.get("images").get("json_file_name")
@@ -129,7 +138,7 @@ class Detection:
         # Download the pre-trained model
         self.dowload_model()
 
-        # Load the YOLOv5 model
+        # Load the YOLOv8 model
         self.load_model()
 
         # Perform object detection and get the results
