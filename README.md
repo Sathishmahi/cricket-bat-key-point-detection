@@ -30,6 +30,11 @@ create ,activate conda env and install requirements
 ```
 run streamlit app
 
+### i create and run the project in [neurolab](https://neurolab.ineuron.ai/) not  local machine so i use local tunnel to test the project if run the project in locally just run 
+```bash
+streamlit run src/bat-detection/app.py
+```
+### if neurolab or colab run 
 ```bash
 bash run.sh
 ```
