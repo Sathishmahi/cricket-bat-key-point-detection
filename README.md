@@ -1,5 +1,8 @@
 # cricket-bat-key-point-detection
-cricket-bat-key-point-detection
+
+## Objective:
+
+The project focuses on developing a key-point detection system to identify the four corners of a cricket batsman's bat.
 
 ## Tech Stack
 
@@ -38,8 +41,8 @@ bash run.sh
 
 
 
-## after predict the model output image
-### output images
+## After Predict the Model 
+### output image 
 
 
 ![pred (6)](https://github.com/Sathishmahi/cricket-bat-key-point-detection/assets/88724458/8a587563-30e3-45ed-a304-81a30a6150e9)
@@ -52,8 +55,8 @@ bash run.sh
 - Data labeling was complex because the order of keypoints varied between images. CVAT.ai tool for data annotation.
 - Training a YOLOv8 large model for both object detection and key-point detection increased training time compared to single-task models.
 
-  **Training time**
-  - I trained the YOLOv8 large model for pose detection, and the training or finetuning process took approximately 30 minutes in Google Colab, which I used for free version. My training dataset consisted of around 140 images.
+**Training time**
+ - I trained the YOLOv8 large model for pose detection, and the training or finetuning process took approximately 30 minutes in Google Colab, which I used for free version. My training dataset consisted of around 140 images.
 
 **Key Point Detection:**
 - Key-point detection is a computer vision task focused on identifying and locating specific points of interest in images. These points serve as critical landmarks for various applications.
@@ -71,11 +74,11 @@ Unlike tasks such as object detection or segmentation, key-point detection invol
 
 ### model weights , datasets , annotation (Click and download the files or folder)
 
-[model-weight](https://drive.google.com/file/d/1gun4_HTdz3zl1KH86nwL6D7BbGin3n4G/view?usp=sharing)
+[model-checkpoints](https://drive.google.com/file/d/1gun4_HTdz3zl1KH86nwL6D7BbGin3n4G/view?usp=sharing)
 
-[dataset](https://drive.google.com/drive/folders/1IF6tmkbp6dXlLv0IdP1MorUbzRFhxPLs?usp=drive_link)
+[custom dataset](https://drive.google.com/drive/folders/1IF6tmkbp6dXlLv0IdP1MorUbzRFhxPLs?usp=drive_link)
 
-[annotation in .xml format](https://drive.google.com/file/d/1ZtttN5ZVfPmlMSVS4LrGg2BYmz00T4RH/view?usp=sharing)
+[data annotation in .xml format](https://drive.google.com/file/d/1ZtttN5ZVfPmlMSVS4LrGg2BYmz00T4RH/view?usp=sharing)
 
 ### Demo Video
 
