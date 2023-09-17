@@ -78,6 +78,10 @@ Unlike tasks such as object detection or segmentation, key-point detection invol
 
 [custom dataset](https://drive.google.com/drive/folders/1IF6tmkbp6dXlLv0IdP1MorUbzRFhxPLs?usp=drive_link)
 
+[config.yaml file](https://drive.google.com/file/d/1S9-3NNy2X94O9YlksQ3IJ_KRGDW22cHF/view?usp=sharing)
+
+[data annotation zip file](https://drive.google.com/file/d/1M2VkDp2KWFEdo_4LF9ZqZLoE18RcS5rg/view?usp=sharing)
+
 [data annotation in .xml format](https://drive.google.com/file/d/1ZtttN5ZVfPmlMSVS4LrGg2BYmz00T4RH/view?usp=sharing)
 
 ### Demo Video
