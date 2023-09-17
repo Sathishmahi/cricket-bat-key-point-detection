@@ -130,7 +130,7 @@ class Detection:
         # Save the image using OpenCV
         cv2.imwrite(img_path, img_arr)
 
-    def combine_all(self)->None:
+    def combine_all(self)->bool:
         """
         Perform all necessary steps to download the model, load it, perform detection, draw key points and bounding boxes, and save the resulting image.
         """
@@ -143,11 +143,14 @@ class Detection:
 
         # Perform object detection and get the results
         result = self.detection(self.model)
-
-        # Draw key points and bounding boxes, and save the resulting image
-        img_arr,result = self.draw_circle_bb(result)
-        self.save_json(result)
-        self.save_img(img_arr)
+        if result:
+            # Draw key points and bounding boxes, and save the resulting image
+            img_arr,result = self.draw_circle_bb(result)
+            self.save_json(result)
+            self.save_img(img_arr)
+            return True
+        else:
+            return False
 
 if __name__ == "__main__":
     # Create an instance of the Detection class and execute the entire pipeline

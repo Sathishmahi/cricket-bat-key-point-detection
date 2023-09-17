@@ -36,16 +36,18 @@ if uploaded_image is not None:
         # Create a button to trigger prediction
         if st.button("Predict"):
             # Perform key-point detection and save the resulting image
-            detection_obj.combine_all()
+            return_code = detection_obj.combine_all()
+            if return_code:
+                # Display the predicted image
+                with open(out_img_path, "rb") as f:
+                    st.image(f.read(), use_column_width=True)
 
-            # Display the predicted image
-            with open(out_img_path, "rb") as f:
-                st.image(f.read(), use_column_width=True)
-
-            # Create a download button for the predicted image
-            with open(out_img_path, "rb") as f:
-                st.download_button(
-                    label="Download The Predicted Image",
-                    data=f.read(),
-                    file_name="pred.jpg",
-                )
+                # Create a download button for the predicted image
+                with open(out_img_path, "rb") as f:
+                    st.download_button(
+                        label="Download The Predicted Image",
+                        data=f.read(),
+                        file_name="pred.jpg",
+                    )
+            else:
+                st.write("No Bat Detected")
