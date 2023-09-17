@@ -1,50 +1,8 @@
-# import streamlit as st
-# import wget
-# from utils import read_config
-# from detection import Detection
-# import requests
-# import os
-
-# config = read_config()
-# root_dir = config.get("images").get("root_dir")
-# input_img_name = config.get("images").get("input_image_name")
-# input_img_path = os.path.join(root_dir, input_img_name)
-# out_img_name = config.get("images").get("out_image_name")
-# out_img_path = os.path.join(root_dir, out_img_name)
-
-# detection_obj = Detection()
-
-# # Create a dropdown widget
-
-# st.write("Bat Key Points Detection")
-
-# uploaded_image = st.file_uploader("Upload an image", type=["jpg", "png", "jpeg"])
-# if uploaded_image is not None:
-#     with open(input_img_path,"wb") as f:
-#         f.write(uploaded_image.read())
-
-#     if os.path.exists(input_img_path):
-#         if st.button("Predict"):
-#             detection_obj.combine_all()
-
-#         with open(out_img_path,"rb") as f:
-
-#             # st.image(f.read(),use_column_width=True)
-#             st.download_button(
-#             label="Download The Predicted Image",
-#             data=f.read(),
-#             file_name="pred.jpg",
-#         )
-
-
-
 
 # Import necessary libraries and modules
 import streamlit as st  # Import Streamlit for web application development
-import wget  # Import wget for downloading files
 from utils import read_config  # Import a custom utility function for reading configurations
 from detection import Detection  # Import the 'Detection' class from the 'detection' module
-import requests  # Import requests for making HTTP requests
 import os  # Import the OS module for file operations
 
 # Read configuration settings using the custom utility function
