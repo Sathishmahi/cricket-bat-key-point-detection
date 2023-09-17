@@ -1,7 +1,9 @@
 images:
 
   root_dir: artifact
-  input_image_name: imput.jpg
+  input_image_name: input.jpg
   out_image_name: out.jpg
-  pretrained_model_drive_id: 11t9TTAD1R1YLcp8ajnGaRLxHfZ4_ix2_
+  pretrained_model_drive_id: 1gun4_HTdz3zl1KH86nwL6D7BbGin3n4G
+  #old id  1TLrm5MnIGd63J9uJ_KzR7X_QNbYDejQP
+  
   model_name: model.pt

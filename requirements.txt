@@ -3,4 +3,5 @@ opencv-python
 pyyaml
 gdown
 streamlit
+cvzone
 wget
