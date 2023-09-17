@@ -15,6 +15,7 @@ input_img_path = os.path.join(root_dir, input_img_name)
 out_img_name = config.get("images").get("out_image_name")
 out_img_path = os.path.join(root_dir, out_img_name)
 
+os.makedirs(root_dir,exist_ok=True)
 # Create an instance of the 'Detection' class
 detection_obj = Detection()
 

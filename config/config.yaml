@@ -5,5 +5,5 @@ images:
   out_image_name: out.jpg
   pretrained_model_drive_id: 1gun4_HTdz3zl1KH86nwL6D7BbGin3n4G
   #old id  1TLrm5MnIGd63J9uJ_KzR7X_QNbYDejQP
-  
+  json_file_name: result.json
   model_name: model.pt

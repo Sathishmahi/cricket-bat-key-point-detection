@@ -6,6 +6,7 @@ import numpy as np  # Import NumPy for numerical operations
 from ultralytics import YOLO  # Import YOLOv5 from Ultralytics for object detection
 import os  # Import the OS module for file operations
 import cvzone  # Import cvzone for additional image processing functions
+import json
 
 # Define a class named 'Detection'
 class Detection:
@@ -78,7 +79,7 @@ class Detection:
         Draw circles around keypoints and bounding boxes on the input image based on the detection results.
         Return the modified image array.
         """
-
+        final_dict = {"key_points":[],"bboxes":[]}
         # Get the original image array from the results
         input_arr = result.orig_img
 
@@ -87,7 +88,9 @@ class Detection:
 
         # Draw circles around key points
         for p in key_points:
-            cv2.circle(input_arr, [int(p[0]), int(p[1])], 3, (255, 0, 0), 5)
+            points = [int(p[0]), int(p[1])]
+            final_dict["key_points"].append(points)
+            cv2.circle(input_arr,points , 3, (255, 0, 0), 5)
 
         # Extract bounding box data from the results
         bb_data = result.boxes.data
@@ -97,11 +100,15 @@ class Detection:
             cfs, cls = bb[-2], "bat"
             x1, y1 = (int(bb[0]) - 10, int(bb[1]) - 10)
             x2, y2 = (int(bb[2]) + 10, int(bb[3]) + 10)
+            final_dict["bboxes"].append([x1,y1,x2,y2])
             cvzone.cornerRect(input_arr, (x1, y1, (x2 - x1), (y2 - y1)), 15, 3)
             cvzone.putTextRect(input_arr, f"{cls}", (int(bb[0]), int(bb[1]) - 20), 2, 2, offset=1)
 
-        return input_arr
-
+        return input_arr,final_dict
+    def save_json(self,content:dict)->None:
+        json_name = self.config.get("images").get("json_file_name")
+        with open(os.path.join(self.root_dir,json_name),"w") as f:
+            json.dump(content, f)
     def save_img(self, img_arr: np.ndarray)->None:
         """
         Save the modified image array to the specified output image path.
@@ -129,7 +136,8 @@ class Detection:
         result = self.detection(self.model)
 
         # Draw key points and bounding boxes, and save the resulting image
-        img_arr = self.draw_circle_bb(result)
+        img_arr,result = self.draw_circle_bb(result)
+        self.save_json(result)
         self.save_img(img_arr)
 
 if __name__ == "__main__":
